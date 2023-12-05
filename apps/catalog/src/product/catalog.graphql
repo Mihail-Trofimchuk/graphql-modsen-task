@@ -1,0 +1,78 @@
+type Category {
+  category_id: ID!
+  category_name: String!
+  products: [Product!]
+}
+
+input CreateCategoryInput {
+  name: String!
+  products: [CreateCategoryProductInput!]
+}
+
+input CreateProductInput {
+  name: String!
+  description: String
+  price: Float!
+  category_id: Float!
+  image: String!
+  available_quantity: Int!
+}
+
+input CreateCategoryProductInput {
+  name: String!
+  description: String
+  price: Float!
+  image: String!
+  available_quantity: Int!
+}
+
+input CreateUserInput {
+  email: String!
+  displayName: String!
+  password: String!
+}
+
+input DeleteCategoryInput {
+  category_id: Float!
+}
+
+input DeleteProductInput {
+  id: Float!
+}
+
+type Mutation {
+  createProduct(CreateProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(DeleteProductInput: DeleteProductInput!): Product!
+  createCategory(input: CreateCategoryInput!): Category!
+  deleteCategory(DeleteCategoryInput: DeleteCategoryInput!): Category!
+}
+
+type Product @key(fields: "id") {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+  category: Category
+  image: String!
+  created_at: String!
+  updated_at: String
+  available_quantity: Int!
+}
+
+type Query {
+  getProducts: [Product]!
+  getProduct(name: String!): Product
+  getCategory(id: Float!): Category!
+  allCategories: [Category]!
+}
+
+input UpdateProductInput {
+  id: Float!
+  name: String
+  description: String
+  price: Float
+  category_id: Float
+  image: String
+  available_quantity: Int
+}
